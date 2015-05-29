@@ -31,7 +31,6 @@ cli_opts = [
                 help='Do not format the output as table'),
     cfg.BoolOpt('show-full-report', short='R', default=False, required=True,
                 help='Show full report about a test (including traceback)')
->>>>>>> Added help description for options
 ]
 
 sanity_group = cfg.OptGroup("sanity", "Sanity configuration group.")
