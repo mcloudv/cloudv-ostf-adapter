@@ -30,6 +30,7 @@ from cloudv_ostf_adapter.validation_plugin.fuel_health import sanity
 from cloudv_ostf_adapter.validation_plugin.fuel_health import smoke
 from cloudv_ostf_adapter.validation_plugin.fuel_health import high_availability
 from cloudv_ostf_adapter.validation_plugin.fuel_health import platform
+from cloudv_ostf_adapter.validation_plugin.fuel_health import cloudvalidation
 
 
 CONF = cfg.CONF
@@ -39,6 +40,7 @@ SUITES = [
     smoke,
     high_availability,
     platform,
+    cloudvalidation
 ]
 
 

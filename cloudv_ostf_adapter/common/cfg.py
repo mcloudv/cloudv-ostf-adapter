@@ -39,6 +39,8 @@ platform_group = cfg.OptGroup("platform",
                               "Platform functional configuration group.")
 rest_group = cfg.OptGroup("rest", "Cloudvalidation ReST API service options.")
 ha_group = cfg.OptGroup("high_availability", "HA configuration group.")
+cloudv_group = cfg.OptGroup("cloudvalidation",
+                            "Cloudvalidation configuration group.")
 
 
 sanity_opts = [
@@ -67,6 +69,16 @@ platform_opts = [
 ]
 ha_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[]),
+]
+
+cloudv_opts = [
+    cfg.MultiStrOpt("enabled_tests", default=[
+        'fuel_health.tests.cloudvalidation.test_logrotate.LogRotationTest',
+        'fuel_health.tests.cloudvalidation.test_ntp.NTPTest',
+        'fuel_health.tests.cloudvalidation.test_cinder_workers.CinderWorkersTest',
+        #'fuel_health.tests.cloudvalidation.test_disk_space_db.DBSpaceTest',
+        'fuel_health.tests.cloudvalidation.test_disk_space_outage.DiskSpaceTest',
+    ]),
 ]
 
 rest_opts = [
@@ -100,12 +112,14 @@ CONF.register_group(sanity_group)
 CONF.register_group(smoke_group)
 CONF.register_group(platform_group)
 CONF.register_group(ha_group)
+CONF.register_group(cloudv_group)
 CONF.register_group(rest_group)
 
 CONF.register_opts(sanity_opts, sanity_group)
 CONF.register_opts(smoke_opts, smoke_group)
 CONF.register_opts(platform_opts, platform_group)
 CONF.register_opts(ha_opts, ha_group)
+CONF.register_opts(cloudv_opts, cloudv_group)
 CONF.register_opts(rest_opts, rest_group)
 
 #client opts
