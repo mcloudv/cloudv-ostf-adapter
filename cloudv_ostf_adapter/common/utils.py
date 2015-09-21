@@ -18,7 +18,7 @@ import prettytable
 import six
 
 from cloudv_ostf_adapter.common import cfg
-from oslo.utils import encodeutils
+from oslo_utils import encodeutils
 
 CONF = cfg.CONF
 
