@@ -5,7 +5,7 @@
 flask
 flask-restful
 nose
-oslo.config>=1.2.1,<1.10.0
+oslo.config>=1.2.1,<1.10.0 # Shall be upgraded when fixed in OSTF!
 pbr>=0.6,!=0.7,<1.0
 oslo.utils
 PrettyTable>=0.7,<0.8
