@@ -15,7 +15,7 @@
 import time
 import testtools
 
-from oslo_config import cfg as conf
+from oslo.config import cfg as conf
 
 from cloudv_ostf_adapter.common import cfg
 from cloudv_ostf_adapter.validation_plugin import base

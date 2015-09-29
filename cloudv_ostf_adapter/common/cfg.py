@@ -14,7 +14,7 @@
 
 import os
 
-from oslo_config import cfg
+from oslo.config import cfg
 
 from cloudv_ostf_adapter import version
 
