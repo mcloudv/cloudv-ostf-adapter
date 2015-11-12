@@ -47,9 +47,14 @@ sanity_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
         'fuel_health.tests.sanity.test_sanity_identity.SanityIdentityTest',
         'fuel_health.tests.sanity.test_sanity_compute.SanityComputeTest',
+        'fuel_health.tests.sanity.test_sanity_glance.GlanceSanityTests'
+        #'fuel_health.tests.sanity.test_sanity_infrastructure.
+        #SanityInfrastructureTest',
+        'fuel_health.tests.sanity.test_sanity_murano.MuranoSanityTests',
+        'fuel_health.tests.sanity.test_sanity_sahara.VanillaTwoTemplatesTest',
+        'fuel_health.tests.sanity.test_sanity_sahara.HDPTwoTemplatesTest'
         'fuel_health.tests.sanity.test_sanity_heat.SanityHeatTest',
-        'fuel_health.tests.sanity.test_sanity_networking.NetworksTest:'
-        'test_list_networks_nova_network',
+        'fuel_health.tests.sanity.test_sanity_networking.NetworksTest',
         'fuel_health.tests.sanity.test_sanity_ceilometer.CeilometerApiTests',
     ]),
 ]
@@ -57,11 +62,15 @@ smoke_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
         'fuel_health.tests.smoke.test_create_flavor.FlavorsAdminTest',
         'fuel_health.tests.smoke.test_create_volume.VolumesTest',
-        'fuel_health.tests.smoke.test_neutron_actions.TestNeutron',
+        #'fuel_health.tests.smoke.test_neutron_actions.TestNeutron',
         'fuel_health.tests.smoke.test_nova_create_instance_with_connectivity.'
         'TestNovaNetwork',
         'fuel_health.tests.smoke.test_nova_image_actions.TestImageAction',
         'fuel_health.tests.smoke.test_user_create.TestUserTenantRole',
+        'fuel_health.tests.smoke.test_create_images.GlanceSmokeTests',
+        'fuel_health.tests.smoke.test_live_migration.'
+        'TestInstanceLiveMigration',
+        #'fuel_health.tests.smoke.test_vcenter.TestVcenter'
     ]),
 ]
 platform_opts = [
@@ -75,9 +84,11 @@ cloudv_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
         'fuel_health.tests.cloudvalidation.test_logrotate.LogRotationTest',
         'fuel_health.tests.cloudvalidation.test_ntp.NTPTest',
-        'fuel_health.tests.cloudvalidation.test_cinder_workers.CinderWorkersTest',
-        #'fuel_health.tests.cloudvalidation.test_disk_space_db.DBSpaceTest',
-        'fuel_health.tests.cloudvalidation.test_disk_space_outage.DiskSpaceTest',
+        'fuel_health.tests.cloudvalidation.test_cinder_workers.'
+        'CinderWorkersTest',
+        'fuel_health.tests.cloudvalidation.test_disk_space_db.DBSpaceTest',
+        'fuel_health.tests.cloudvalidation.test_disk_space_outage.'
+        'DiskSpaceTest',
     ]),
 ]
 
