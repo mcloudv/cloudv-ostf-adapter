@@ -47,12 +47,12 @@ sanity_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
         'fuel_health.tests.sanity.test_sanity_identity.SanityIdentityTest',
         'fuel_health.tests.sanity.test_sanity_compute.SanityComputeTest',
-        'fuel_health.tests.sanity.test_sanity_glance.GlanceSanityTests'
+        'fuel_health.tests.sanity.test_sanity_glance.GlanceSanityTests',
         #'fuel_health.tests.sanity.test_sanity_infrastructure.
         #SanityInfrastructureTest',
         'fuel_health.tests.sanity.test_sanity_murano.MuranoSanityTests',
         'fuel_health.tests.sanity.test_sanity_sahara.VanillaTwoTemplatesTest',
-        'fuel_health.tests.sanity.test_sanity_sahara.HDPTwoTemplatesTest'
+        'fuel_health.tests.sanity.test_sanity_sahara.HDPTwoTemplatesTest',
         'fuel_health.tests.sanity.test_sanity_heat.SanityHeatTest',
         'fuel_health.tests.sanity.test_sanity_networking.NetworksTest',
         'fuel_health.tests.sanity.test_sanity_ceilometer.CeilometerApiTests',
@@ -68,8 +68,8 @@ smoke_opts = [
         'fuel_health.tests.smoke.test_nova_image_actions.TestImageAction',
         'fuel_health.tests.smoke.test_user_create.TestUserTenantRole',
         'fuel_health.tests.smoke.test_create_images.GlanceSmokeTests',
-        'fuel_health.tests.smoke.test_live_migration.'
-        'TestInstanceLiveMigration',
+        #'fuel_health.tests.smoke.test_live_migration.'
+        #'TestInstanceLiveMigration',
         #'fuel_health.tests.smoke.test_vcenter.TestVcenter'
     ]),
 ]
