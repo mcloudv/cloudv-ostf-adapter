@@ -5,12 +5,14 @@
 flask
 flask-restful
 nose
-oslo.config>=1.6.0 # Apache-2.0
 pbr>=0.6,!=0.7,<1.0
-oslo.utils
 PrettyTable>=0.7,<0.8
 requests>=2.2.0,!=2.4.0
 simplejson>=2.2.0
 
-#TODO(???): move this fix into fuel-ostf
-python-muranoclient
+# Some specific nits found in fuel-ostf, so please provide this too
+oslo.config==1.6.0 # Shall be upgraded when fixed in OSTF!
+oslo.i18n==1.3.1
+oslo.log==1.13.0
+oslo.serialization==1.2.0
+oslo.utils==1.2.1

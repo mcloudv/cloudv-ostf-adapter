@@ -1,4 +1,5 @@
 [gerrit]
-host=review.openstack.org
+host=gerrit.mirantis.com
 port=29418
-project=stackforge/cloudv-ostf-adapter.git
+project=mirantis-cloud-validation/cloudv-ostf-adapter.git
+defaultbranch=master

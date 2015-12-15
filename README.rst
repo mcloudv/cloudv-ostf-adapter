@@ -39,6 +39,11 @@ Arguments::
     run_suite - Runs certain test suite
     run_test - Runs certain test
 
+Options::
+
+    --show-full-report - provide full output (with traceback in case of
+    failure)
+    --no-format - do not format output as table
 
 Examples
 --------
