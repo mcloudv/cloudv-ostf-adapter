@@ -14,7 +14,10 @@
 
 import os
 
-from oslo.config import cfg
+try:
+    from oslo_config import cfg
+except ImportError:
+    from oslo.config import cfg
 
 from cloudv_ostf_adapter import version
 

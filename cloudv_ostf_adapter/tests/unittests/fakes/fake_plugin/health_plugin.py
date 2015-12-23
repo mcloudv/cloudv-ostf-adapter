@@ -12,7 +12,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from oslo.config import cfg
+try:
+    from oslo_config import cfg
+except ImportError:
+    from oslo.config import cfg
 
 from cloudv_ostf_adapter.validation_plugin import base
 from cloudv_ostf_adapter.tests.unittests.fakes.fake_plugin import (

@@ -14,7 +14,10 @@
 
 import sys
 
-from oslo.config import cfg
+try:
+    from oslo_config import cfg
+except ImportError:
+    from oslo.config import cfg
 
 from cloudv_ostf_adapter.common import cfg as config
 from cloudv_client import client

@@ -22,7 +22,11 @@ from flask.ext import restful
 from flask.ext.restful import abort
 from flask.ext.restful import reqparse
 from flask import request
-from oslo.config import cfg
+
+try:
+    from oslo_config import cfg
+except ImportError:
+    from oslo.config import cfg
 
 from cloudv_ostf_adapter import validation_plugin
 
