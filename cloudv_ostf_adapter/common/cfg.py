@@ -41,6 +41,8 @@ rest_group = cfg.OptGroup("rest", "Cloudvalidation ReST API service options.")
 ha_group = cfg.OptGroup("high_availability", "HA configuration group.")
 cloudv_group = cfg.OptGroup("cloudvalidation",
                             "Cloudvalidation configuration group.")
+configuration_group = cfg.OptGroup("configuration",
+                                   "Configuration test group")
 
 
 sanity_opts = [
@@ -92,6 +94,12 @@ cloudv_opts = [
     ]),
 ]
 
+configuration_opts = [
+    cfg.MultiStrOpt("enabled_tests", default=[
+        'fuel_health.tests.configuration.test_configuration.SanityConfigurationTest',
+    ]),
+]
+
 rest_opts = [
     cfg.StrOpt('server_host',
                default='127.0.0.1',
@@ -131,6 +139,7 @@ CONF.register_opts(smoke_opts, smoke_group)
 CONF.register_opts(platform_opts, platform_group)
 CONF.register_opts(ha_opts, ha_group)
 CONF.register_opts(cloudv_opts, cloudv_group)
+CONF.register_opts(configuration_opts, configuration_group)
 CONF.register_opts(rest_opts, rest_group)
 
 #client opts
