@@ -80,11 +80,11 @@ smoke_opts = [
 ]
 platform_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
-        'fuel_health.tests.test_platform.test_ceilometer.'
-        'CeilometerApiPlatformTests',
-        'fuel_health.tests.test_platform.test_create_alarm.'
-        'CeilometerApiSmokeTests',
-        'fuel_health.tests.test_platform.test_heat.HeatSmokeTests'.
+        #'fuel_health.tests.test_platform.test_ceilometer.'
+        #'CeilometerApiPlatformTests',
+        #'fuel_health.tests.test_platform.test_create_alarm.'
+        #'CeilometerApiSmokeTests',
+        'fuel_health.tests.test_platform.test_heat.HeatSmokeTests',
         'fuel_health.tests.test_platform.test_murano_linux.'
         'MuranoDeployLinuxServicesTests',
         'fuel_health.tests.test_platform.test_sahara.SaharaClusterTest',
@@ -92,19 +92,19 @@ platform_opts = [
 ]
 ha_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
-        'fuel_health.tests.ha.test_mysql_replication.TestMysqlReplication',
-        'fuel_health.tests.ha.TestMysqlStatus',
+        #'fuel_health.tests.ha.test_mysql_replication.TestMysqlReplication',
+        #'fuel_health.tests.ha.TestMysqlStatus',
         'fuel_health.tests.ha.test_rabbit.RabbitSanityTest',
-        'fuel_health.tests.ha.test_pacemaker_status.TestPacemakerStatus',
+        #'fuel_health.tests.ha.test_pacemaker_status.TestPacemakerStatus',
     ]),
 ]
 
 cloudv_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
         'fuel_health.tests.cloudvalidation.test_logrotate.LogRotationTest',
-        'fuel_health.tests.cloudvalidation.test_ntp.NTPTest',
-        'fuel_health.tests.cloudvalidation.test_cinder_workers.'
-        'CinderWorkersTest',
+        #'fuel_health.tests.cloudvalidation.test_ntp.NTPTest',
+        #'fuel_health.tests.cloudvalidation.test_cinder_workers.'
+        #'CinderWorkersTest',
         'fuel_health.tests.cloudvalidation.test_disk_space_db.DBSpaceTest',
         'fuel_health.tests.cloudvalidation.test_disk_space_outage.'
         'DiskSpaceTest',
