@@ -84,17 +84,17 @@ platform_opts = [
         #'CeilometerApiPlatformTests',
         #'fuel_health.tests.test_platform.test_create_alarm.'
         #'CeilometerApiSmokeTests',
-        'fuel_health.tests.test_platform.test_heat.HeatSmokeTests',
-        'fuel_health.tests.test_platform.test_murano_linux.'
-        'MuranoDeployLinuxServicesTests',
-        'fuel_health.tests.test_platform.test_sahara.SaharaClusterTest',
+        #'fuel_health.tests.tests_platform.test_heat.HeatSmokeTests',
+        #'fuel_health.tests.tests_platform.test_murano_linux.'
+        #'MuranoDeployLinuxServicesTests',
+        #'fuel_health.tests.tests_platform.test_sahara.SaharaClusterTest',
     ]),
 ]
 ha_opts = [
     cfg.MultiStrOpt("enabled_tests", default=[
         #'fuel_health.tests.ha.test_mysql_replication.TestMysqlReplication',
         #'fuel_health.tests.ha.TestMysqlStatus',
-        'fuel_health.tests.ha.test_rabbit.RabbitSanityTest',
+        #'fuel_health.tests.ha.test_rabbit.RabbitSanityTest',
         #'fuel_health.tests.ha.test_pacemaker_status.TestPacemakerStatus',
     ]),
 ]
