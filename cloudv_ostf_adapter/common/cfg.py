@@ -24,7 +24,7 @@ from cloudv_ostf_adapter import version
 
 common_opts = [
     cfg.StrOpt("health_check_config_path",
-               default='etc/cloudv_ostf_adapter/health_check.conf'),
+               default='etc/cloudv_ostf_adapter/test.conf'),
     cfg.StrOpt("enabled_validation_plugins", default=['fuel_health']),
     cfg.StrOpt("nose_verbosity", default="-v")
 ]
@@ -36,86 +36,8 @@ cli_opts = [
                 help='Show full report about a test (including traceback)')
 ]
 
-sanity_group = cfg.OptGroup("sanity", "Sanity configuration group.")
-smoke_group = cfg.OptGroup("smoke", "Smoke configuration group.")
-platform_group = cfg.OptGroup("platform",
-                              "Platform functional configuration group.")
+
 rest_group = cfg.OptGroup("rest", "Cloudvalidation ReST API service options.")
-ha_group = cfg.OptGroup("high_availability", "HA configuration group.")
-cloudv_group = cfg.OptGroup("cloudvalidation",
-                            "Cloudvalidation configuration group.")
-configuration_group = cfg.OptGroup("configuration",
-                                   "Configuration test group")
-
-
-sanity_opts = [
-    cfg.MultiStrOpt("enabled_tests", default=[
-        'fuel_health.tests.sanity.test_sanity_identity.SanityIdentityTest',
-        'fuel_health.tests.sanity.test_sanity_compute.SanityComputeTest',
-        'fuel_health.tests.sanity.test_sanity_glance.GlanceSanityTests',
-        #'fuel_health.tests.sanity.test_sanity_infrastructure.'
-        #'SanityInfrastructureTest',
-        'fuel_health.tests.sanity.test_sanity_murano.MuranoSanityTests',
-        'fuel_health.tests.sanity.test_sanity_sahara.VanillaTwoTemplatesTest',
-        'fuel_health.tests.sanity.test_sanity_sahara.HDPTwoTemplatesTest',
-        'fuel_health.tests.sanity.test_sanity_heat.SanityHeatTest',
-        'fuel_health.tests.sanity.test_sanity_networking.NetworksTest',
-        'fuel_health.tests.sanity.test_sanity_ceilometer.CeilometerApiTests',
-    ]),
-]
-smoke_opts = [
-    cfg.MultiStrOpt("enabled_tests", default=[
-        'fuel_health.tests.smoke.test_create_flavor.FlavorsAdminTest',
-        'fuel_health.tests.smoke.test_create_volume.VolumesTest',
-        'fuel_health.tests.smoke.test_neutron_actions.TestNeutron',
-        'fuel_health.tests.smoke.test_nova_create_instance_with_connectivity.'
-        'TestNovaNetwork',
-        'fuel_health.tests.smoke.test_nova_image_actions.TestImageAction',
-        'fuel_health.tests.smoke.test_user_create.TestUserTenantRole',
-        'fuel_health.tests.smoke.test_create_images.GlanceSmokeTests',
-        'fuel_health.tests.smoke.test_live_migration.'
-        'TestInstanceLiveMigration',
-        'fuel_health.tests.smoke.test_vcenter.TestVcenter'
-    ]),
-]
-platform_opts = [
-    cfg.MultiStrOpt("enabled_tests", default=[
-        #'fuel_health.tests.test_platform.test_ceilometer.'
-        #'CeilometerApiPlatformTests',
-        #'fuel_health.tests.test_platform.test_create_alarm.'
-        #'CeilometerApiSmokeTests',
-        #'fuel_health.tests.tests_platform.test_heat.HeatSmokeTests',
-        #'fuel_health.tests.tests_platform.test_murano_linux.'
-        #'MuranoDeployLinuxServicesTests',
-        #'fuel_health.tests.tests_platform.test_sahara.SaharaClusterTest',
-    ]),
-]
-ha_opts = [
-    cfg.MultiStrOpt("enabled_tests", default=[
-        #'fuel_health.tests.ha.test_mysql_replication.TestMysqlReplication',
-        #'fuel_health.tests.ha.TestMysqlStatus',
-        #'fuel_health.tests.ha.test_rabbit.RabbitSanityTest',
-        #'fuel_health.tests.ha.test_pacemaker_status.TestPacemakerStatus',
-    ]),
-]
-
-cloudv_opts = [
-    cfg.MultiStrOpt("enabled_tests", default=[
-        'fuel_health.tests.cloudvalidation.test_logrotate.LogRotationTest',
-        #'fuel_health.tests.cloudvalidation.test_ntp.NTPTest',
-        #'fuel_health.tests.cloudvalidation.test_cinder_workers.'
-        #'CinderWorkersTest',
-        'fuel_health.tests.cloudvalidation.test_disk_space_db.DBSpaceTest',
-        'fuel_health.tests.cloudvalidation.test_disk_space_outage.'
-        'DiskSpaceTest',
-    ]),
-]
-
-configuration_opts = [
-    cfg.MultiStrOpt("enabled_tests", default=[
-        'fuel_health.tests.configuration.test_configuration.SanityConfigurationTest',
-    ]),
-]
 
 rest_opts = [
     cfg.StrOpt('server_host',
@@ -144,19 +66,8 @@ rest_client_opts = [
 CONF = cfg.CONF
 CONF.register_opts(common_opts)
 
-CONF.register_group(sanity_group)
-CONF.register_group(smoke_group)
-CONF.register_group(platform_group)
-CONF.register_group(ha_group)
-CONF.register_group(cloudv_group)
 CONF.register_group(rest_group)
 
-CONF.register_opts(sanity_opts, sanity_group)
-CONF.register_opts(smoke_opts, smoke_group)
-CONF.register_opts(platform_opts, platform_group)
-CONF.register_opts(ha_opts, ha_group)
-CONF.register_opts(cloudv_opts, cloudv_group)
-CONF.register_opts(configuration_opts, configuration_group)
 CONF.register_opts(rest_opts, rest_group)
 
 #client opts

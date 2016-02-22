@@ -19,7 +19,7 @@ from oslo_utils import importutils
 
 from cloudv_ostf_adapter.common import cfg
 from cloudv_ostf_adapter.common import utils
-from cloudv_ostf_adapter.nose_plugin import discovery
+from cloudv_ostf_adapter.common import discovery
 
 CONF = cfg.CONF
 
@@ -52,14 +52,18 @@ class ValidationPlugin(object):
 
     test_executor = "%(test_module_path)s:%(class)s.%(test)s"
 
-    def __init__(self, name, suites, load_tests=True):
-        __suites = []
-        for suite in suites:
-            __suites.extend(suite.TESTS)
+    def __init__(self, name, load_tests=True):
+
+        # TODO(albartash): load_tests becomes ambigous because
+        # loading is going here anyway. We need to reinvestigate
+        # requirement of using self.suites, etc in plugin when
+        # load_tests = False
+	self.test_inspector = discovery.TestInspector(name + '.tests')
+        __suites = self.test_inspector.get_suites()
 
         self.name = name
         self.suites = __suites
-        self._suites = suites
+        self._suites = self.suites
         self.tests = (self.get_tests()
                       if load_tests else [])
 
@@ -67,12 +71,7 @@ class ValidationPlugin(object):
         """
         Test collector
         """
-        tests = []
-        for suite in self._suites:
-            _tests = discovery.do_test_discovery(
-                suite.TESTS)
-            tests.extend(_tests)
-        return tests
+        return self.test_inspector.get_tests()
 
     def _collect_test(self, tests):
         test_suites_paths = []

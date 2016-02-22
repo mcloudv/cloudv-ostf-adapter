@@ -26,22 +26,8 @@ from oslo_utils import importutils
 from cloudv_ostf_adapter.common import cfg
 from cloudv_ostf_adapter.common import object_descriptors
 from cloudv_ostf_adapter.validation_plugin import base
-from cloudv_ostf_adapter.validation_plugin.fuel_health import sanity
-from cloudv_ostf_adapter.validation_plugin.fuel_health import smoke
-from cloudv_ostf_adapter.validation_plugin.fuel_health import high_availability
-from cloudv_ostf_adapter.validation_plugin.fuel_health import platform
-from cloudv_ostf_adapter.validation_plugin.fuel_health import cloudvalidation
-
 
 CONF = cfg.CONF
-
-SUITES = [
-    sanity,
-    smoke,
-    high_availability,
-    platform,
-    cloudvalidation
-]
 
 
 class FuelHealthPlugin(base.ValidationPlugin):
@@ -78,12 +64,13 @@ class FuelHealthPlugin(base.ValidationPlugin):
     def __init__(self, load_tests=True):
         self.setup_fuel_health_on_need()
         super(FuelHealthPlugin, self).__init__(
-            'fuel_health', SUITES, load_tests=load_tests)
+            'fuel_health', load_tests=load_tests)
 
     def get_tests(self):
         try:
             return super(FuelHealthPlugin, self).get_tests()
-        except Exception:
+        except Exception as e:
+            print("Error happened: " + e.message)
             print("fuel_health is not installed.")
 
     def _get_duration_from_report(self, report):

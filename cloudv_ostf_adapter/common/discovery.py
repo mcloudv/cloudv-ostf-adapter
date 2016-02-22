@@ -1,4 +1,16 @@
-# Discovery tool for tests
+#    Copyright 2015 Mirantis, Inc
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
 
 import inspect
 import pkgutil
@@ -13,19 +25,23 @@ class TestInspector(object):
     def __init__(self, base_module_name):
 
         self.base_module_name = base_module_name
+        self.modules = self._get_modules()
+        self.suites = self._get_suites_and_tests()
 
-    def get_modules(self):
-        """Get modules with tests."""
+    def _get_modules(self):
+        """Get modules with tests on init."""
         modules = []
 
-        for module in pkgutil.walk_packages():
+        # TODO(albartash): create a better function for onerror,
+        # as we need to pass this info into log
+        for module in pkgutil.walk_packages(onerror=lambda e: True):
             if self.base_module_name+'.' in module[1]:
                 modules.append(module[1])
 
         return modules
 
     def _get_suites_and_tests(self):
-        """Get suites with tests."""
+        """Get suites with tests on init."""
 
         suites = []
         for module in self.get_modules():
@@ -42,22 +58,22 @@ class TestInspector(object):
 
         return suites
 
+    def get_modules(self):
+        """Get list of modules."""
+        return self.modules
+
     def get_suites(self):
         """Get list of suites."""
 
-        suites = self._get_suites_and_tests()
-        return [suite['suite'] for suite in suites]
-
+        return [suite['suite'] for suite in self.suites]
 
     def get_tests(self):
         """Get all tests in all suites."""
 
-        suites = self._get_suites_and_tests()
         tests = []
-        for suite in suites:
+        for suite in self.suites:
             test_list = map(lambda name: ':'.join([suite['suite'], name]),
                     suite['tests'])
             tests.extend(test_list)
 
         return tests
-
