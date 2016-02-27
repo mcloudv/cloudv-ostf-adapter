@@ -23,8 +23,8 @@ except ImportError:
 from cloudv_ostf_adapter.common import cfg as config
 from cloudv_ostf_adapter.common import utils
 from cloudv_ostf_adapter.cmd import _common as cmd
-
 from cloudv_ostf_adapter import validation_plugin
+
 
 CONF = cfg.CONF
 
@@ -64,6 +64,8 @@ class OSTF(object):
     @cmd.args("--no-format", dest="no_format")
     @cmd.args("--show-full-report", dest="show_full_report")
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
+    @cmd.args("--raw", dest="raw_format")
+    @cmd.args("--output-file", dest="output_file")
     def run_suites(self, validation_plugin_name):
         for plugin in validation_plugin.VALIDATION_PLUGINS:
             _plugin = plugin(load_tests=False)
@@ -72,12 +74,20 @@ class OSTF(object):
                 reports = plugin().run_suites_within_cli()
                 utils.print_formatted(reports,
                                       CONF.no_format,
-                                      CONF.show_full_report)
+                                      CONF.show_full_report,
+                                      CONF.raw_format)
+		if CONF.output_file:
+		    with open(CONF.output_file, 'w+') as fp:
+  		        results = utils.raw_as_json(reports)
+			fp.write(results)
+
 
     @cmd.args("--suite", dest="suite")
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     @cmd.args("--no-format", dest="no_format")
     @cmd.args("--show-full-report", dest="show_full_report")
+    @cmd.args("--raw", dest="raw_format")
+    @cmd.args("--output-file", dest="output_file")
     def run_suite(self, validation_plugin_name, suite):
         for plugin in validation_plugin.VALIDATION_PLUGINS:
             _plugin = plugin(load_tests=False)
@@ -86,12 +96,20 @@ class OSTF(object):
                 reports = plugin().run_suite_within_cli(suite)
                 utils.print_formatted(reports,
                                       CONF.no_format,
-                                      CONF.show_full_report)
+                                      CONF.show_full_report,
+                                      CONF.raw_format)
+
+		if CONF.output_file:
+		    with open(CONF.output_file, 'w+') as fp:
+  		        results = utils.raw_as_json(reports)
+			fp.write(results)
 
     @cmd.args("--no-format", dest="no_format")
     @cmd.args("--show-full-report", dest="show_full_report")
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     @cmd.args("--test", dest="test")
+    @cmd.args("--raw", dest="raw_format")
+    @cmd.args("--output-file", dest="output_file")
     def run_test(self, validation_plugin_name, test):
         for plugin in validation_plugin.VALIDATION_PLUGINS:
             _plugin = plugin(load_tests=False)
@@ -100,7 +118,13 @@ class OSTF(object):
                 reports = plugin().run_test(test)
                 utils.print_formatted(reports,
                                       CONF.no_format,
-                                      CONF.show_full_report)
+                                      CONF.show_full_report,
+                                      CONF.raw_format)
+
+		if CONF.output_file:
+		    with open(CONF.output_file, 'w+') as fp:
+  		        results = utils.raw_as_json(reports)
+			fp.write(results)
 
 
 CATS = {

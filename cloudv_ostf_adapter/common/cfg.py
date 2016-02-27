@@ -33,7 +33,11 @@ cli_opts = [
     cfg.BoolOpt('no-format', short='F', default=False, required=True,
                 help='Do not format the output as table'),
     cfg.BoolOpt('show-full-report', short='R', default=False, required=True,
-                help='Show full report about a test (including traceback)')
+                help='Show full report about a test (including traceback)'),
+    cfg.BoolOpt('raw_format', default=False, required=True,
+                help='Return results as JSON'),
+    cfg.StrOpt('output-file', default='', required=False,
+                help='File to store results of test running. Must be used with option --raw'),
 ]
 
 

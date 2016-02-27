@@ -52,8 +52,16 @@ def print_dict(d, verbose=False, property="Property"):
     _print(pt, property)
 
 
-def print_formatted(reports, raw_format, verbose):
+def print_raw_json(reports, verbose):
+    raise NotImplementedError("PRINT RAW JSON")
 
+def print_formatted(reports, raw_format, verbose, as_json=False):
+
+    if as_json:
+        # @TODO(albartash): It's ugly but useful: we still parse results
+        # from adapter's output
+        print_raw_json(reports, verbose)
+        return
     if raw_format:
         fn_print = print_raw
     else:
