@@ -25,6 +25,7 @@ from oslo_utils import importutils
 
 from cloudv_ostf_adapter.common import cfg
 from cloudv_ostf_adapter.common import object_descriptors
+from cloudv_ostf_adapter.common.logger import LOG
 from cloudv_ostf_adapter.validation_plugin import base
 
 CONF = cfg.CONF
@@ -70,8 +71,8 @@ class FuelHealthPlugin(base.ValidationPlugin):
         try:
             return super(FuelHealthPlugin, self).get_tests()
         except Exception as e:
-            print("Error happened: " + e.message)
-            print("fuel_health is not installed.")
+            LOG.error("Error happened: " + str(e))
+            LOG.error("fuel_health is not installed.")
 
     def _get_duration_from_report(self, report):
         for line in report:

@@ -25,7 +25,6 @@ from cloudv_ostf_adapter.common import utils
 from cloudv_ostf_adapter.cmd import _common as cmd
 from cloudv_ostf_adapter import validation_plugin
 
-
 CONF = cfg.CONF
 
 

@@ -12,6 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+from cloudv_ostf_adapter.common.logger import LOG
 from oslo_utils import importutils
 
 
@@ -32,7 +33,7 @@ class Test(object):
         try:
             importutils.import_class(self._test_class)
         except ImportError:
-            print("Can't import test's class: %s. "
+            LOG.error("Can't import test's class: %s. "
                   "It is not installed." % self._test_class)
 
     def __init__(self, test_class):

@@ -16,6 +16,8 @@
 import argparse
 import six
 
+from cloudv_ostf_adapter.common.logger import LOG
+
 
 def args(*args, **kwargs):
     """
@@ -123,4 +125,4 @@ def _main(global_conf, local_conf, category_opt, cli_args):
         ret = fn(*fn_args, **fn_kwargs)
         return ret
     except Exception as e:
-        print(str(e))
+        LOG.error(str(e))

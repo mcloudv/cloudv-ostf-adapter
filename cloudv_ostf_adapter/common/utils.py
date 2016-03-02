@@ -18,6 +18,7 @@ import prettytable
 import six
 
 from cloudv_ostf_adapter.common import cfg
+from cloudv_ostf_adapter.common.logger import LOG
 from oslo_utils import encodeutils
 
 CONF = cfg.CONF
@@ -25,9 +26,9 @@ CONF = cfg.CONF
 
 def _print(pt, order):
     if sys.version_info >= (3, 0):
-        print(pt.get_string(sortby=order))
+        LOG.info(pt.get_string(sortby=order))
     else:
-        print(encodeutils.safe_encode(pt.get_string(sortby=order)))
+        LOG.info(encodeutils.safe_encode(pt.get_string(sortby=order)))
 
 
 def print_raw(d, verbose):
@@ -38,8 +39,8 @@ def print_raw(d, verbose):
         if fn_filter(row[0]):
             continue
 
-        print('[%s]:\t%s' % (row[0].upper(), row[1]))
-    print('')
+        LOG.info('[%s]:\t%s' % (row[0].upper(), row[1]))
+    LOG.info('')
 
 
 def print_dict(d, verbose=False, property="Property"):
