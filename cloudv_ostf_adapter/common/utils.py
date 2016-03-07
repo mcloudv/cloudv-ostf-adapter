@@ -12,7 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-
+import json
 import sys
 import prettytable
 import six
@@ -55,6 +55,10 @@ def print_dict(d, verbose=False, property="Property"):
 
 def print_raw_json(reports, verbose):
     raise NotImplementedError("PRINT RAW JSON")
+
+def raw_as_json(reports):
+    results = [x.as_json() for x in reports]
+    return json.dumps(results)
 
 def print_formatted(reports, raw_format, verbose, as_json=False):
 

@@ -76,7 +76,7 @@ class OSTF(object):
                                       CONF.show_full_report,
                                       CONF.raw_format)
 		if CONF.output_file:
-		    with open(CONF.output_file, 'w+') as fp:
+		    with open(CONF.output_file, 'w') as fp:
   		        results = utils.raw_as_json(reports)
 			fp.write(results)
 
@@ -99,7 +99,7 @@ class OSTF(object):
                                       CONF.raw_format)
 
 		if CONF.output_file:
-		    with open(CONF.output_file, 'w+') as fp:
+		    with open(CONF.output_file, 'w') as fp:
   		        results = utils.raw_as_json(reports)
 			fp.write(results)
 
@@ -121,7 +121,7 @@ class OSTF(object):
                                       CONF.raw_format)
 
 		if CONF.output_file:
-		    with open(CONF.output_file, 'w+') as fp:
+		    with open(CONF.output_file, 'w') as fp:
   		        results = utils.raw_as_json(reports)
 			fp.write(results)
 

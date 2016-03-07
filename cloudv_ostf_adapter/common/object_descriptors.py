@@ -70,6 +70,16 @@ class Test(object):
             'duration': self.duration,
         }
 
+    def as_json(self):
+        """Object data as JSON dict."""
+        return {
+            'test': self._test_caption,
+            'suite': self._test_class,
+            'report': self.report,
+            'result': self.result,
+            'duration': self.duration
+        }
+
     @property
     def duration(self):
         """

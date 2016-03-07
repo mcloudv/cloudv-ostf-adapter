@@ -13,4 +13,4 @@
 #    under the License.
 
 release = "cloudv-ostf-adapter"
-version = "2016.2-1.1"
+version = "2016.3-1.2"
