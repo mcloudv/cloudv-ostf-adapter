@@ -52,21 +52,11 @@ def print_dict(d, verbose=False, property="Property"):
     [pt.add_row(list(r)) for r in six.iteritems(d) if not fn_filter(r[0])]
     _print(pt, property)
 
-
-def print_raw_json(reports, verbose):
-    raise NotImplementedError("PRINT RAW JSON")
-
 def raw_as_json(reports):
     results = [x.as_json() for x in reports]
     return json.dumps(results)
 
-def print_formatted(reports, raw_format, verbose, as_json=False):
-
-    if as_json:
-        # @TODO(albartash): It's ugly but useful: we still parse results
-        # from adapter's output
-        print_raw_json(reports, verbose)
-        return
+def print_formatted(reports, raw_format, verbose):
     if raw_format:
         fn_print = print_raw
     else:

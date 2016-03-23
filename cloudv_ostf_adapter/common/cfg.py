@@ -34,10 +34,8 @@ cli_opts = [
                 help='Do not format the output as table'),
     cfg.BoolOpt('show-full-report', short='R', default=False, required=True,
                 help='Show full report about a test (including traceback)'),
-    cfg.BoolOpt('raw_format', default=False, required=True,
-                help='Return results as JSON'),
-    cfg.StrOpt('output-file', default='', required=False,
-                help='File to store results of test running. Must be used with option --raw'),
+   cfg.StrOpt('output-file', default='', required=False,
+                help='File to store results of test running'),
 ]
 
 
@@ -51,13 +49,13 @@ rest_opts = [
                default=8777,
                help="Port number"),
     cfg.StrOpt('log_file',
-               default='/var/log/ostf.log',
+               default='/mcv/log/ostf_adapter.log',
                help=""),
     cfg.StrOpt('debug',
                default=False,
                help="Debug for REST API."),
     cfg.StrOpt('jobs_dir',
-               default='/var/log/ostf',
+               default='/mcv/log/',
                help="Directory where jobs will be stored."),
 ]
 
