@@ -17,9 +17,8 @@ from oslo_utils import importutils
 
 
 def do_test_discovery(classes):
-    """
-    Will discover test cases from suites
-    """
+    """Discover test cases from suites"""
+
     _tests = []
     _loader = loader.TestLoader()
     for classname in classes:

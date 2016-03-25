@@ -14,12 +14,13 @@
 
 import json
 import sys
-import prettytable
-import six
 
 from cloudv_ostf_adapter.common import cfg
 from cloudv_ostf_adapter.common.logger import LOG
 from oslo_utils import encodeutils
+import prettytable
+import six
+
 
 CONF = cfg.CONF
 
@@ -52,9 +53,11 @@ def print_dict(d, verbose=False, property="Property"):
     [pt.add_row(list(r)) for r in six.iteritems(d) if not fn_filter(r[0])]
     _print(pt, property)
 
+
 def raw_as_json(reports):
     results = [x.as_json() for x in reports]
     return json.dumps(results)
+
 
 def print_formatted(reports, raw_format, verbose):
     if raw_format:
@@ -112,6 +115,9 @@ def print_list(objs, fields, formatters={}, order_by=None, obj_is_dict=False,
 
 
 def poll_until(pollster, expected_result=None, sleep_time=5):
+    # albartash: I have absolutely no idea why this import is living here,
+    # but let it be here until we have time to test the correct way
+
     import time
     if not callable(pollster):
         raise Exception("%s is not callable" % pollster.__name__)

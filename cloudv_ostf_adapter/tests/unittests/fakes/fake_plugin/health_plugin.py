@@ -13,16 +13,16 @@
 #    under the License.
 
 try:
-    from oslo_config import cfg
-except ImportError:
     from oslo.config import cfg
+except ImportError:
+    from oslo_config import cfg
 
-from cloudv_ostf_adapter.validation_plugin import base
 from cloudv_ostf_adapter.tests.unittests.fakes.fake_plugin import (
     fake_plugin_tests)
+from cloudv_ostf_adapter.validation_plugin import base
+
 
 CONF = cfg.CONF
-
 SUITES = [fake_plugin_tests]
 
 

@@ -14,30 +14,27 @@
 
 import sys
 
+from cloudv_client import client
+from cloudv_ostf_adapter.cmd import _common as cmd
+from cloudv_ostf_adapter.common import cfg as config
+from cloudv_ostf_adapter.common import utils
+
 try:
     from oslo.config import cfg
 except ImportError:
     from oslo_config import cfg
 
-from cloudv_ostf_adapter.common import cfg as config
-from cloudv_client import client
-from cloudv_ostf_adapter.common import utils
-from cloudv_ostf_adapter.cmd import _common as cmd
 
 CONF = cfg.CONF
 
 
 class ClientV1Shell(object):
-    """
-    Represents set of capabilities to interact with Cloudvalidation API
-    """
+    """Represents set of capabilities to interact with Cloudvalidation API"""
 
     _client = client.Client(CONF.host, CONF.port, CONF.api_version)
 
     def list_plugins(self):
-        """
-        List plugins
-        """
+        """List plugins"""
 
         resp = self._client.plugins.list(load_tests=False)
         for plugin in resp:
@@ -48,12 +45,6 @@ class ClientV1Shell(object):
 
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     def list_plugin_suites(self, validation_plugin_name):
-        """
-        List plugin suites
-        Required options:
-          --validation-plugin
-        """
-
         resp = self._client.suites.list_suites(validation_plugin_name)
         suites = resp['suites']
         resp['suites'] = "\n".join(suites)
@@ -62,12 +53,6 @@ class ClientV1Shell(object):
 
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     def list_plugin_tests(self, validation_plugin_name):
-        """
-        List plugin tests
-        Required options:
-          --validation-plugin
-        """
-
         resp = self._client.suites.list_tests_for_suites(
             validation_plugin_name)
         tests = resp['tests']
@@ -77,12 +62,6 @@ class ClientV1Shell(object):
 
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     def run_suites(self, validation_plugin_name):
-        """
-        Run plugin suites
-        Required options:
-          --validation-plugin
-        """
-
         resp = self._client.suites.run_suites(validation_plugin_name)
         utils.print_list(resp,
                          ['test', 'duration', 'result', 'report'],
@@ -91,13 +70,6 @@ class ClientV1Shell(object):
     @cmd.args("--suite", dest="suite")
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     def run_suite(self, validation_plugin_name, suite):
-        """
-        Run plugin suite
-        Required options:
-          --validation-plugin
-          --suite
-        """
-
         resp = self._client.suites.run_suite_tests(
             suite, validation_plugin_name)
         suite_test_reports = resp['report']
@@ -108,13 +80,6 @@ class ClientV1Shell(object):
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
     @cmd.args("--test", dest="test")
     def run_test(self, validation_plugin_name, test):
-        """
-        Run plugin test
-        Required options:
-          --validation-plugin
-          --test
-        """
-
         resp = self._client.tests.run(test, validation_plugin_name)
         utils.print_list(resp,
                          ['test', 'duration', 'result', 'report'],

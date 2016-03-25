@@ -254,10 +254,10 @@ class TestServer(testtools.TestCase):
             '/v1/jobs/create', content_type='application/json',
             data=json.dumps(data)).data
         check = {u'job': {u'description': u'description',
-                 u'id': u'fake_uuid',
-                 u'name': u'fake',
-                 u'status': u'CREATED',
-                 u'tests': self.plugin.tests}}
+                          u'id': u'fake_uuid',
+                          u'name': u'fake',
+                          u'status': u'CREATED',
+                          u'tests': self.plugin.tests}}
         self.assertEqual(self._resp_to_dict(rv), check)
 
     def test_execute_job_not_found(self):

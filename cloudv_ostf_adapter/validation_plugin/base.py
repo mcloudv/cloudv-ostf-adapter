@@ -15,11 +15,12 @@
 import os
 import sys
 
+from cloudv_ostf_adapter.common import cfg
+from cloudv_ostf_adapter.common import discovery
+from cloudv_ostf_adapter.common import utils
+
 from oslo_utils import importutils
 
-from cloudv_ostf_adapter.common import cfg
-from cloudv_ostf_adapter.common import utils
-from cloudv_ostf_adapter.common import discovery
 
 CONF = cfg.CONF
 
@@ -30,14 +31,6 @@ class SuiteDescriptor(object):
     test_attrs = ['tests']
 
     def __init__(self, test_group_definition, tests):
-        """
-        Describes test specific test group
-        @param test_group_definition: Test group definition
-                                      (i.e. sanity, smoke, HA, platform)
-        @type test_group_definition: basestring
-        @param tests: list of tests per test group
-        @type tests: list
-        """
         self.test_group = test_group_definition
         self.tests = tests
 
@@ -58,7 +51,7 @@ class ValidationPlugin(object):
         # loading is going here anyway. We need to reinvestigate
         # requirement of using self.suites, etc in plugin when
         # load_tests = False
-	self.test_inspector = discovery.TestInspector(name + '.tests')
+        self.test_inspector = discovery.TestInspector(name + '.tests')
         __suites = self.test_inspector.get_suites()
 
         self.name = name
@@ -68,9 +61,6 @@ class ValidationPlugin(object):
                       if load_tests else [])
 
     def get_tests(self):
-        """
-        Test collector
-        """
         return self.test_inspector.get_tests()
 
     def _collect_test(self, tests):
@@ -101,50 +91,24 @@ class ValidationPlugin(object):
         return tests
 
     def descriptor(self):
-        """
-        Returns Plugin descriptor that contains:
-         - plugin name
-         - plugin suites
-         - plugin tests
-        """
-        return {
-            "name": self.name,
-            "suites": self.suites,
-            "tests": self.tests,
-        }
+        return {"name": self.name,
+                "suites": self.suites,
+                "tests": self.tests}
 
     def run_suites(self):
-        """
-        Runs all tests from all suites
-        """
         raise Exception("Plugin doesn't support suites execution.")
 
     def run_suite(self, suite):
-        """
-        Runs specific suite
-        """
         raise Exception("Plugin doesn't support suite execution.")
 
     def run_test(self, test):
-        """
-        Runs specific test
-        """
         raise Exception("Plugin doesn't support test execution.")
 
     def run_suite_within_cli(self, suite):
-        """
-        Runs test suite with view for CLI
-        """
         raise Exception("CLI execution is not supported.")
 
     def run_suites_within_cli(self):
-        """
-        Runs test suites with view for CLI
-        """
         raise Exception("CLI execution is not supported.")
 
     def run_test_within_cli(self, test):
-        """
-        Runs test suites with view for CLI
-        """
         raise Exception("CLI execution is not supported.")

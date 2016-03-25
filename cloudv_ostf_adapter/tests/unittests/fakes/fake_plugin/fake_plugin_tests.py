@@ -15,13 +15,14 @@
 import time
 import testtools
 
-try:
-    from oslo_config import cfg as conf
-except ImportError:
-    from oslo.config import cfg as conf
-
 from cloudv_ostf_adapter.common import cfg
 from cloudv_ostf_adapter.validation_plugin import base
+
+try:
+    from oslo.config import cfg as conf
+except ImportError:
+    from oslo_config import cfg as conf
+
 
 CONF = cfg.CONF
 

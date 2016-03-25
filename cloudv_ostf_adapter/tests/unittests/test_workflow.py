@@ -12,10 +12,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import testtools
-
-from cloudv_ostf_adapter import validation_plugin
 from cloudv_ostf_adapter.tests.unittests.fakes.fake_plugin import health_plugin
+from cloudv_ostf_adapter import validation_plugin
+import testtools
 
 
 class TestWorkflow(testtools.TestCase):

@@ -20,13 +20,15 @@ from cloudv_ostf_adapter.common.logger import LOG
 
 
 def args(*args, **kwargs):
-    """
-    Decorates commandline arguments for actions
+    """Decorates commandline arguments for actions
+
     :param args: sub-category commandline arguments
     :param kwargs: sub-category commandline arguments
+
     :return: decorator: object attribute setter
     :rtype: callable
     """
+
     def _decorator(func):
         func.__dict__.setdefault('args', []).insert(0, (args, kwargs))
         return func
@@ -34,15 +36,16 @@ def args(*args, **kwargs):
 
 
 def methods_of(obj):
-    """
-    Get all callable methods of an object that don't
-    start with underscore (private attributes)
-    returns
+    """Get all callable methods of an object that don't
+    start with underscore (private attributes) returns
+
     :param obj: objects to get callable attributes from
     :type obj: object
+
     :return result: a list of tuples of the form (method_name, method)
     :rtype: list
     """
+
     result = []
     for i in dir(obj):
         if callable(getattr(obj, i)) and not i.startswith('_'):
@@ -51,20 +54,24 @@ def methods_of(obj):
 
 
 def add_command_parsers(categories):
-    """
-    Parses actions commandline arguments from each category
+    """Parses actions commandline arguments from each category
+
     :param categories: commandline categories
     :type categories: dict
+
     :return: _subparser: commandline subparser
     """
+
     def _subparser(subparsers):
-        """
-        Iterates over categories and registers action
+        """Iterates over categories and registers action
         commandline arguments for each category
+
         :param subparsers: commandline subparser
+
         :return: None
         :rtype: None
         """
+
         for category in categories:
             command_object = categories[category]()
 
@@ -100,14 +107,6 @@ def add_command_parsers(categories):
 
 
 def _main(global_conf, local_conf, category_opt, cli_args):
-    """
-
-    :param global_conf: staged CONF
-    :param local_conf: tool conf
-    :param category_opt: subparser category options
-    :param cli_args: tool CLI arguments
-    :return:
-    """
     global_conf.register_cli_opt(category_opt)
     local_conf.parse_args(cli_args)
     fn = global_conf.category.action_fn

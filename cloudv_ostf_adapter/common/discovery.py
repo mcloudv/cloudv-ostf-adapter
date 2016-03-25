@@ -12,7 +12,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import inspect
 import pkgutil
 import pyclbr
 
@@ -35,7 +34,7 @@ class TestInspector(object):
         # TODO(albartash): create a better function for onerror,
         # as we need to pass this info into log
         for module in pkgutil.walk_packages(onerror=lambda e: True):
-            if self.base_module_name+'.' in module[1]:
+            if self.base_module_name + '.' in module[1]:
                 modules.append(module[1])
 
         return modules
@@ -51,11 +50,11 @@ class TestInspector(object):
                 tests = filter(lambda test: test.startswith('test_'),
                                suite_dict[suite].methods)
 
-                if not tests: continue
+                if not tests:
+                    continue
 
                 suites.append({'suite': '.'.join([module, suite]),
                                'tests': tests})
-
         return suites
 
     def get_modules(self):
@@ -73,7 +72,7 @@ class TestInspector(object):
         tests = []
         for suite in self.suites:
             test_list = map(lambda name: ':'.join([suite['suite'], name]),
-                    suite['tests'])
+                            suite['tests'])
             tests.extend(test_list)
 
         return tests

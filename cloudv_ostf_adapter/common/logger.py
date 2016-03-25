@@ -12,8 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from logging import getLogger
 from logging.config import fileConfig
+from logging import getLogger
 
 DEFAULT_LOG_INI_FILE = '/mcv/conf/ostf_adapter_log.ini'
 

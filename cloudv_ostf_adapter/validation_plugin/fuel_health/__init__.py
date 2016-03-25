@@ -13,20 +13,22 @@
 #    under the License.
 
 import os
-import sys
 
 try:
     from StringIO import StringIO
 except ImportError:
     from io import StringIO
 
+import sys
+
+from cloudv_ostf_adapter.common import cfg
+from cloudv_ostf_adapter.common.logger import LOG
+from cloudv_ostf_adapter.common import object_descriptors
+from cloudv_ostf_adapter.validation_plugin import base
+
 from nose import core
 from oslo_utils import importutils
 
-from cloudv_ostf_adapter.common import cfg
-from cloudv_ostf_adapter.common import object_descriptors
-from cloudv_ostf_adapter.common.logger import LOG
-from cloudv_ostf_adapter.validation_plugin import base
 
 CONF = cfg.CONF
 
@@ -88,12 +90,6 @@ class FuelHealthPlugin(base.ValidationPlugin):
         return cls_name.split(':')[1]
 
     def _execute_and_report(self, test_suite_paths):
-        """
-        Executes and assembles report right after each test execution
-        @param test_suite_paths: FS-based path to python module
-        @type test_suite_paths: list of basestring
-        @rtype: list of object_descriptors.Test
-        """
         reports = []
         for test in test_suite_paths:
             suites_report = StringIO()

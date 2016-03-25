@@ -17,32 +17,19 @@ from oslo_utils import importutils
 
 
 class Test(object):
-    """
-    This class represents siginificant information about test case
-    such as:
-        test
-        its execution report
-        its result
-        and its duration
+    """Test description class."""
 
-    """
     def safe_import(self):
-        """
-        Performs safe import on demand of test class
-        """
+        """Performs safe import on demand of test class"""
+
         try:
             importutils.import_class(self._test_class)
         except ImportError:
-            LOG.error("Can't import test's class: %s. "
-                  "It is not installed." % self._test_class)
+            LOG.error("Cannot import test class: '%s'. "
+                      "It is not installed." % self._test_class)
 
     def __init__(self, test_class):
-        """
-        @param test_class: unit test case
-        @type test_class: basestring
-        """
         self._test_class = test_class
-
         self._test_caption = test_class
 
         self._duration = None
@@ -59,32 +46,20 @@ class Test(object):
 
     @property
     def description(self):
-        """
-        Extracts docstrings from test
-        :rtype: dict
-        """
-        return {
-            'test': self._test_caption,
-            'report': self.report,
-            'result': self.result,
-            'duration': self.duration,
-        }
+        return {'test': self._test_caption,
+                'report': self.report,
+                'result': self.result,
+                'duration': self.duration}
 
     def as_json(self):
-        """Object data as JSON dict."""
-        return {
-            'test': self._test_caption,
-            'suite': self._test_class,
-            'report': self.report,
-            'result': self.result,
-            'duration': self.duration
-        }
+        return {'test': self._test_caption,
+                'suite': self._test_class,
+                'report': self.report,
+                'result': self.result,
+                'duration': self.duration}
 
     @property
     def duration(self):
-        """
-        Test execution duration
-        """
         return self._duration
 
     @duration.setter
@@ -93,9 +68,6 @@ class Test(object):
 
     @property
     def name(self):
-        """
-        Returns nose test name
-        """
         return self._test_caption
 
     @name.setter

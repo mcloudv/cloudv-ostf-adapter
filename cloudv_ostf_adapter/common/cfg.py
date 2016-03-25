@@ -34,8 +34,8 @@ cli_opts = [
                 help='Do not format the output as table'),
     cfg.BoolOpt('show-full-report', short='R', default=False, required=True,
                 help='Show full report about a test (including traceback)'),
-   cfg.StrOpt('output-file', default='', required=False,
-                help='File to store results of test running'),
+    cfg.StrOpt('output-file', default='', required=False,
+               help='File to store results of test running'),
 ]
 
 
@@ -66,16 +66,11 @@ rest_client_opts = [
 ]
 
 CONF = cfg.CONF
+
 CONF.register_opts(common_opts)
-
 CONF.register_group(rest_group)
-
 CONF.register_opts(rest_opts, rest_group)
-
-#client opts
 CONF.register_opts(rest_client_opts)
-
-# CLI opts
 CONF.register_cli_opts(cli_opts)
 
 

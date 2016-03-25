@@ -12,29 +12,23 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-
 import sys
+
+from cloudv_ostf_adapter.cmd import _common as cmd
+from cloudv_ostf_adapter.common import cfg as config
+from cloudv_ostf_adapter.common import utils
+from cloudv_ostf_adapter import validation_plugin
 
 try:
     from oslo.config import cfg
 except ImportError:
     from oslo_config import cfg
 
-from cloudv_ostf_adapter.common import cfg as config
-from cloudv_ostf_adapter.common import utils
-from cloudv_ostf_adapter.cmd import _common as cmd
-from cloudv_ostf_adapter import validation_plugin
 
 CONF = cfg.CONF
 
 
 class OSTF(object):
-    """
-    Represents CLI view for OSTF tests commands:
-    - list validation plugins
-    - list per-plugin test suites
-    """
-
     def list_plugins(self):
         for plugin in validation_plugin.VALIDATION_PLUGINS:
             _plugin = plugin(load_tests=False)
@@ -73,11 +67,10 @@ class OSTF(object):
                 utils.print_formatted(reports,
                                       CONF.no_format,
                                       CONF.show_full_report)
-		if CONF.output_file:
-		    with open(CONF.output_file, 'w') as fp:
-  		        results = utils.raw_as_json(reports)
-			fp.write(results)
-
+                if CONF.output_file:
+                    with open(CONF.output_file, 'w') as fp:
+                        results = utils.raw_as_json(reports)
+                        fp.write(results)
 
     @cmd.args("--suite", dest="suite")
     @cmd.args("--validation-plugin-name", dest="validation_plugin_name")
@@ -94,10 +87,10 @@ class OSTF(object):
                                       CONF.no_format,
                                       CONF.show_full_report)
 
-		if CONF.output_file:
-		    with open(CONF.output_file, 'w') as fp:
-  		        results = utils.raw_as_json(reports)
-			fp.write(results)
+                if CONF.output_file:
+                    with open(CONF.output_file, 'w') as fp:
+                        results = utils.raw_as_json(reports)
+                        fp.write(results)
 
     @cmd.args("--no-format", dest="no_format")
     @cmd.args("--show-full-report", dest="show_full_report")
@@ -114,10 +107,10 @@ class OSTF(object):
                                       CONF.no_format,
                                       CONF.show_full_report)
 
-		if CONF.output_file:
-		    with open(CONF.output_file, 'w') as fp:
-  		        results = utils.raw_as_json(reports)
-			fp.write(results)
+                if CONF.output_file:
+                    with open(CONF.output_file, 'w') as fp:
+                        results = utils.raw_as_json(reports)
+                        fp.write(results)
 
 
 CATS = {
