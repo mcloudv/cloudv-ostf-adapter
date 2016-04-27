@@ -50,6 +50,7 @@ class FuelHealthPlugin(base.ValidationPlugin):
                 self.murano = cfg.CONF.murano
                 self.heat = cfg.CONF.heat
                 self.sahara = cfg.CONF.sahara
+                self.fuel = cfg.CONF.fuel
 
             def register_opts(self):
                 FUEL_HEALTH_CONF.register_compute_opts(CONF)
@@ -59,6 +60,7 @@ class FuelHealthPlugin(base.ValidationPlugin):
                 FUEL_HEALTH_CONF.register_murano_opts(CONF)
                 FUEL_HEALTH_CONF.register_heat_opts(CONF)
                 FUEL_HEALTH_CONF.register_sahara_opts(CONF)
+                FUEL_HEALTH_CONF.register_fuel_opts(CONF)
 
         FUEL_HEALTH_CONF.FileConfig = MonkeyPatchFuelHealthConf
 

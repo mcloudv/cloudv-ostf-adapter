@@ -12,11 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-try:
-    import simplejson as json
-except ImportError:
-    import json
-
+import json
 import requests
 
 from cloudv_ostf_adapter.common import exception

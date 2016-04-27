@@ -1,11 +1,15 @@
-# The order of packages is significant, because pip processes them in the order
-# of appearance. Changing the order has an impact on the overall integration
-# process, which may cause wedges in the gate later.
-
 flask
 flask-restful
 nose
 pbr>=1.6
 PrettyTable>=0.7,<0.8
+
+# Version of requests is pinned due to compatibility with
+# OSTF requirements
 requests>=2.7.0,<2.8.0
-simplejson>=2.2.0
+
+six>=1.10.0
+
+# Since MOS 8.0 we need version 2.3.0 or newer
+# Older versions are kept for compatibility with older MOS releases
+oslo.config>=1.9.0
