@@ -13,6 +13,7 @@
 #    under the License.
 
 import os
+import re
 import sys
 
 from cloudv_ostf_adapter.common import cfg
@@ -89,6 +90,13 @@ class ValidationPlugin(object):
             if suite in test:
                 tests.append(test)
         return tests
+
+    def get_suite_by_name(self, suite):
+        re_suite = re.compile('\.%s$' % re.escape(suite))
+        for suite in self.suites:
+            if re_suite.search(suite):
+                return [suite]
+        return []
 
     def descriptor(self):
         return {"name": self.name,
