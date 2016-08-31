@@ -139,11 +139,11 @@ class FuelHealthPlugin(base.ValidationPlugin):
             raise Exception(
                 "%s is a test case, but not test suite." % suite)
         else:
-            tests = self.get_suite_by_name(suite)
-            if not tests:
+            _suite = self.get_suite_by_name(suite)
+            if not _suite:
                 raise Exception(
                 "Suite '%s' not found." % suite)
-
+            tests = self.get_tests_by_suite(_suite)
             test_suites_paths = self.setup_execution(tests)
             reports = self._execute_and_report(test_suites_paths)
         sys.stderr = safe_stderr

@@ -95,8 +95,8 @@ class ValidationPlugin(object):
         re_suite = re.compile('\.%s$' % re.escape(suite))
         for suite in self.suites:
             if re_suite.search(suite):
-                return [suite]
-        return []
+                return suite
+        return None
 
     def descriptor(self):
         return {"name": self.name,
