@@ -12,10 +12,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from logging.config import fileConfig
-from logging import getLogger
+import logging
+import logging.config
 
-DEFAULT_LOG_INI_FILE = '/mcv/conf/ostf_adapter_log.ini'
-
-fileConfig(DEFAULT_LOG_INI_FILE, disable_existing_loggers=True)
-LOG = getLogger('AdapterLogger')
+# redirect all warnings to a logger named 'py.warnings'
+# with a severity of WARNING
+logging.captureWarnings(True)
+logging.config.fileConfig('/mcv/conf/ostf_adapter_log.ini')
+LOG = logging.getLogger('AdapterLogger')
